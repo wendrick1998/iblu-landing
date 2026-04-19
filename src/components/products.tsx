@@ -1,13 +1,18 @@
+"use client";
+
 import { WHATSAPP_LINK } from "@/lib/constants";
-import { SmartphoneIcon, WhatsAppIcon } from "./icons";
+import { WhatsAppIcon } from "./icons";
+import { useInView } from "@/hooks/use-in-view";
+import { useSpotlight } from "@/hooks/use-spotlight";
 
 const categories = [
   {
     title: "iPhones",
-    description: "Trabalhamos com diversos modelos, como:",
+    description: "Modelos revisados e prontos para uso",
     items: ["iPhone 11", "iPhone 12", "iPhone 13", "iPhone 14"],
-    note: "Consulte disponibilidade atual pelo WhatsApp",
+    note: "Consulte disponibilidade pelo WhatsApp",
     icon: "📱",
+    span: "sm:col-span-2",
   },
   {
     title: "iPad & MacBook",
@@ -15,71 +20,102 @@ const categories = [
     items: [],
     note: null,
     icon: "💻",
+    span: "",
   },
   {
     title: "Acessórios",
-    description:
-      "Capinhas, carregadores, fones e muito mais para o seu dia a dia.",
+    description: "Capinhas, carregadores, fones e mais.",
     items: [],
     note: null,
     icon: "🎧",
+    span: "",
   },
   {
     title: "Assistência Técnica",
-    description:
-      "Manutenção especializada para iPhones e outros dispositivos Apple.",
+    description: "Manutenção especializada para dispositivos Apple.",
     items: [],
     note: null,
     icon: "🔧",
+    span: "sm:col-span-2",
   },
 ];
 
 export function Products() {
-  return (
-    <section className="bg-[#f8fbfe] py-16 sm:py-20">
-      <div className="mx-auto max-w-5xl px-4 sm:px-6">
-        <h2 className="text-center text-3xl font-bold text-gray-900 sm:text-4xl">
-          O que você encontra aqui
-        </h2>
+  const { ref, inView } = useInView();
+  const { containerRef, handleMouseMove } = useSpotlight();
 
-        <div className="mt-12 grid gap-6 sm:grid-cols-2">
-          {categories.map((cat) => (
+  return (
+    <section ref={ref} className="relative py-20 sm:py-28" style={{ background: "#091729" }}>
+      <div className="section-divider" />
+
+      <div className="mx-auto max-w-6xl px-5 sm:px-8">
+        <div className={`text-center ${inView ? "animate-fade-up" : "opacity-0"}`}>
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#4A9BD9]">
+            Nossos Produtos
+          </p>
+          <h2 className="mt-3 font-[family-name:var(--font-display)] text-3xl font-bold text-white sm:text-4xl">
+            O que você encontra aqui
+          </h2>
+        </div>
+
+        <div
+          ref={containerRef}
+          onMouseMove={handleMouseMove}
+          className="mt-12 grid gap-4 sm:grid-cols-2 sm:gap-5"
+        >
+          {categories.map((cat, i) => (
             <div
               key={cat.title}
-              className="rounded-2xl border border-[#1E5F8A]/10 bg-white p-6 shadow-sm transition-shadow hover:shadow-md"
+              className={`glow-card p-6 sm:p-8 ${cat.span} ${
+                inView ? "animate-fade-up" : "opacity-0"
+              }`}
+              style={{ animationDelay: inView ? `${(i + 1) * 100}ms` : undefined }}
             >
-              <div className="flex items-center gap-3 mb-4">
-                <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-[#1E5F8A] text-xl">
-                  <span>{cat.icon}</span>
+              <div className="relative z-10">
+                <div className="flex items-center gap-4">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#4A9BD9]/8 text-2xl">
+                    {cat.icon}
+                  </div>
+                  <div>
+                    <h3 className="font-[family-name:var(--font-display)] text-xl font-bold text-white">
+                      {cat.title}
+                    </h3>
+                    <p className="text-sm text-blue-200/40">{cat.description}</p>
+                  </div>
                 </div>
-                <h3 className="text-xl font-bold text-gray-900">{cat.title}</h3>
+
+                {cat.items.length > 0 && (
+                  <div className="mt-5 flex flex-wrap gap-2">
+                    {cat.items.map((item) => (
+                      <span
+                        key={item}
+                        className="rounded-full border border-white/[0.06] px-4 py-1.5 text-sm font-medium text-blue-200/70 transition-all duration-300 hover:border-[#4A9BD9]/30 hover:text-white hover:bg-[#4A9BD9]/8"
+                      >
+                        {item}
+                      </span>
+                    ))}
+                  </div>
+                )}
+                {cat.note && (
+                  <p className="mt-4 text-sm italic text-blue-200/30">
+                    {cat.note}
+                  </p>
+                )}
               </div>
-              <p className="text-gray-600">{cat.description}</p>
-              {cat.items.length > 0 && (
-                <div className="mt-3 flex flex-wrap gap-2">
-                  {cat.items.map((item) => (
-                    <span
-                      key={item}
-                      className="rounded-full bg-[#E8F4FD] px-3 py-1 text-sm font-medium text-[#0D3B5E]"
-                    >
-                      {item}
-                    </span>
-                  ))}
-                </div>
-              )}
-              {cat.note && (
-                <p className="mt-3 text-sm text-gray-500 italic">{cat.note}</p>
-              )}
             </div>
           ))}
         </div>
 
-        <div className="mt-10 text-center">
+        <div
+          className={`mt-12 text-center ${inView ? "animate-fade-up" : "opacity-0"}`}
+          style={{ animationDelay: inView ? "600ms" : undefined }}
+        >
           <a
             href={WHATSAPP_LINK}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 rounded-full bg-[#075E54] px-6 py-3 font-bold text-white shadow transition-all hover:bg-[#128C7E] hover:shadow-lg"
+            className="btn-shimmer inline-flex items-center gap-2.5 rounded-full bg-[#075E54] px-7 py-3.5 font-bold text-white transition-all duration-300 hover:bg-[#128C7E] hover:scale-[1.02] active:scale-100"
+            style={{ boxShadow: "0 0 30px rgba(7,94,84,0.25)" }}
           >
             <WhatsAppIcon className="h-5 w-5" />
             Consultar disponibilidade
