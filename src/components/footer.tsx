@@ -4,11 +4,11 @@ import { MapPinIcon } from "./icons";
 
 export function Footer() {
   return (
-    <footer className="bg-gray-950 py-12 text-gray-400">
+    <footer className="bg-[#060e1a] py-12 text-gray-400">
       <div className="mx-auto max-w-5xl px-4 sm:px-6">
         <div className="grid gap-8 sm:grid-cols-3">
           <div>
-            <h3 className="font-bold text-white">Sobre a empresa</h3>
+            <h3 className="font-bold text-white">{STORE.fullName}</h3>
             <p className="mt-3 text-sm leading-relaxed">
               Atuamos no mercado desde {STORE.since}, oferecendo produtos de
               qualidade, atendimento direto e transparência em todas as vendas.
@@ -49,7 +49,7 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-8 border-t border-gray-800 pt-6 text-center text-xs">
+        <div className="mt-8 border-t border-white/10 pt-6 text-center text-xs">
           <p>
             Este site tem como objetivo apresentar nossos produtos e serviços. O
             atendimento e a finalização das vendas são realizados via WhatsApp.

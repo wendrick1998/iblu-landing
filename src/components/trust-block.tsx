@@ -14,10 +14,10 @@ export function TrustBlock() {
           {badges.map((b) => (
             <div
               key={b.label}
-              className="flex flex-col items-center gap-2 rounded-xl bg-gray-50 px-5 py-4 sm:px-8 sm:py-6"
+              className="flex flex-col items-center gap-2 rounded-xl border border-[#1E5F8A]/10 bg-[#E8F4FD] px-5 py-4 sm:px-8 sm:py-6"
             >
-              <b.icon className="h-8 w-8 text-[#25D366]" />
-              <span className="text-xs font-bold text-gray-700 sm:text-sm">
+              <b.icon className="h-8 w-8 text-[#1E5F8A]" />
+              <span className="text-xs font-bold text-[#0D3B5E] sm:text-sm">
                 {b.label}
               </span>
             </div>
@@ -30,7 +30,7 @@ export function TrustBlock() {
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-gray-600 leading-relaxed">
             Somos uma loja com atuação desde{" "}
-            <strong className="text-gray-900">2013</strong>, atendendo clientes
+            <strong className="text-[#1E5F8A]">2013</strong>, atendendo clientes
             com transparência, qualidade e suporte direto. Trabalhamos com
             aparelhos revisados e testados, garantindo mais segurança na sua
             compra.
@@ -42,9 +42,10 @@ export function TrustBlock() {
             "Loja física em funcionamento",
             "Atendimento direto com especialista",
             "Produtos com procedência verificada",
+            "Opção de retirada na loja ou entrega",
           ].map((text) => (
             <div key={text} className="flex items-center gap-2">
-              <CheckCircleIcon className="h-5 w-5 text-[#25D366] shrink-0" />
+              <CheckCircleIcon className="h-5 w-5 text-[#1E5F8A] shrink-0" />
               <span>{text}</span>
             </div>
           ))}

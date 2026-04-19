@@ -6,6 +6,7 @@ const items = [
   "Atendimento rápido e direto",
   "Compra segura com suporte real",
   "Loja física para sua tranquilidade",
+  "Sem surpresas após a compra",
 ];
 
 export function Differentials() {
@@ -16,13 +17,13 @@ export function Differentials() {
           Por que comprar com a gente?
         </h2>
 
-        <div className="mx-auto mt-10 max-w-xl space-y-4">
+        <div className="mx-auto mt-10 grid max-w-2xl gap-4 sm:grid-cols-2">
           {items.map((text) => (
             <div
               key={text}
-              className="flex items-center gap-3 rounded-xl bg-gray-50 px-5 py-4"
+              className="flex items-center gap-3 rounded-xl border border-[#1E5F8A]/10 bg-[#f8fbfe] px-5 py-4"
             >
-              <CheckCircleIcon className="h-6 w-6 text-[#25D366] shrink-0" />
+              <CheckCircleIcon className="h-6 w-6 text-[#1E5F8A] shrink-0" />
               <span className="text-gray-800 font-medium">{text}</span>
             </div>
           ))}
